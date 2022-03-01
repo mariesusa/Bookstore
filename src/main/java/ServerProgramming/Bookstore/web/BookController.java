@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +15,7 @@ import ServerProgramming.Bookstore.domain.Book;
 import ServerProgramming.Bookstore.domain.BookRepository;
 import ServerProgramming.Bookstore.domain.CategoryRepository;
 
+@CrossOrigin(origins = "http://localhost:8080")
 @Controller
 public class BookController {
 	

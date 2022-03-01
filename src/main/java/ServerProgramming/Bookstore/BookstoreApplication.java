@@ -21,23 +21,23 @@ public class BookstoreApplication {
 		SpringApplication.run(BookstoreApplication.class, args);
 	}
 	
-	@Bean
-	public CommandLineRunner bookDemo(BookRepository repository, CategoryRepository crepository) {
-		return (args) -> {
-			log.info("save new books");
-			crepository.save(new Category("Horror"));
-			crepository.save(new Category("Classics"));
-			crepository.save(new Category("Crime"));
-			
-			repository.save(new Book("Test Book", "Test Author", 1988, "12322-232495", 20.00, crepository.findByName("Horror").get(0)));
-			repository.save(new Book("Testing Book 2", "Author Nauthor", 1995, "123-09876", 400.90, crepository.findByName("Crime").get(0)));
-			repository.save(new Book("Booken 3", "Guy Writer", 2019, "754-948545", 3000.05, crepository.findByName("Classics").get(0)));
-			
-			log.info("fetch all books");
-			for (Book book : repository.findAll()) {
-				log.info(book.toString());
-			}
-		};
-	}
+//	@Bean
+//	public CommandLineRunner bookDemo(BookRepository repository, CategoryRepository crepository) {
+//		return (args) -> {
+//			log.info("save new books");
+//			crepository.save(new Category("Horror"));
+//			crepository.save(new Category("Classics"));
+//			crepository.save(new Category("Crime"));
+//			
+//			repository.save(new Book("Test Book", "Test Author", 1988, "12322-232495", 20.00, crepository.findByName("Horror").get(0)));
+//			repository.save(new Book("Testing Book 2", "Author Nauthor", 1995, "123-09876", 400.90, crepository.findByName("Crime").get(0)));
+//			repository.save(new Book("Booken 3", "Guy Writer", 2019, "754-948545", 3000.05, crepository.findByName("Classics").get(0)));
+//			
+//			log.info("fetch all books");
+//			for (Book book : repository.findAll()) {
+//				log.info(book.toString());
+//			}
+//		};
+//	}
 
 }
