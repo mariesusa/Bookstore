@@ -3,6 +3,7 @@ package ServerProgramming.Bookstore.web;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,6 +25,11 @@ public class BookController {
 	
 	@Autowired
 	private CategoryRepository crepository;
+	
+	@RequestMapping(value="/login")
+	public String login() {
+		return "login";
+	}
 	
 	@RequestMapping(value= {"/", "/booklist"})
 	public String booklist(Model model) {
@@ -49,12 +55,14 @@ public class BookController {
 	}
 	
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String deleteBook(@PathVariable("id") Long id, Model model) {
 		repository.deleteById(id);
 		return "redirect:../booklist";
 	}
 	
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String editBook(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("book", repository.findById(id));
 		model.addAttribute("categories", crepository.findAll());
