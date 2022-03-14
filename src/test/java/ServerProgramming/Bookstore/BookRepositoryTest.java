@@ -5,20 +5,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import ServerProgramming.Bookstore.domain.Book;
 import ServerProgramming.Bookstore.domain.BookRepository;
 import ServerProgramming.Bookstore.domain.CategoryRepository;
 
-@RunWith(SpringRunner.class)
-@ExtendWith(SpringExtension.class)
 @DataJpaTest
+@AutoConfigureTestDatabase(replace=Replace.NONE)
 public class BookRepositoryTest {
 
 	@Autowired
@@ -43,10 +40,10 @@ public class BookRepositoryTest {
 	
 	@Test
 	public void deleteNewBook() {
-		List<Book> books = repository.findByAuthor("Test Book");
+		List<Book> books = repository.findByTitle("Test Book");
 		Book book = books.get(0);
 		repository.delete(book);
-		List<Book> newBooks = repository.findByAuthor("Test Book");
+		List<Book> newBooks = repository.findByTitle("Test Book");
 		assertThat(newBooks).hasSize(0);
 	}
 
